@@ -137,54 +137,60 @@ const Index = () => {
             </div>
 
             {/* Results Section */}
-            <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-white/90">Results</h2>
-              <Card className="neo-blur">
-                <CardContent className="space-y-4 pt-6">
-                  <div>
-                    <h3 className="font-medium text-white/90">SQL Query:</h3>
-                    <pre className="mt-2 rounded bg-black/40 p-4 text-sm text-white/80 overflow-x-auto">
-                      {sqlQuery}
-                    </pre>
-                  </div>
+            {(sqlQuery || summary || tableData.columns.length > 0) && (
+              <div className="space-y-4">
+                <h2 className="text-xl font-semibold text-white/90">Results</h2>
+                <Card className="neo-blur">
+                  <CardContent className="space-y-4 pt-6">
+                    {sqlQuery && (
+                      <div>
+                        <h3 className="font-medium text-white/90">SQL Query:</h3>
+                        <pre className="mt-2 rounded bg-black/40 p-4 text-sm text-white/80 overflow-x-auto">
+                          {sqlQuery}
+                        </pre>
+                      </div>
+                    )}
 
-                  <div>
-                    <h3 className="font-medium text-white/90">Summary:</h3>
-                    <p className="mt-2 text-white/80">{summary}</p>
-                  </div>
+                    {summary && (
+                      <div>
+                        <h3 className="font-medium text-white/90">Summary:</h3>
+                        <p className="mt-2 text-white/80">{summary}</p>
+                      </div>
+                    )}
 
-                  {tableData.columns.length > 0 && (
-                    <div>
-                      <h3 className="font-medium text-white/90 mb-2">Table Results:</h3>
-                      <div className="rounded-md border border-white/10">
-                        <Table>
-                          <TableHeader>
-                            <TableRow>
-                              {tableData.columns.map((column, index) => (
-                                <TableHead key={index} className="text-white/90">
-                                  {column}
-                                </TableHead>
-                              ))}
-                            </TableRow>
-                          </TableHeader>
-                          <TableBody>
-                            {tableData.rows.map((row, rowIndex) => (
-                              <TableRow key={rowIndex}>
-                                {row.map((cell, cellIndex) => (
-                                  <TableCell key={cellIndex} className="text-white/80">
-                                    {cell}
-                                  </TableCell>
+                    {tableData.columns.length > 0 && (
+                      <div>
+                        <h3 className="font-medium text-white/90 mb-2">Table Results:</h3>
+                        <div className="rounded-md border border-white/10">
+                          <Table>
+                            <TableHeader>
+                              <TableRow>
+                                {tableData.columns.map((column, index) => (
+                                  <TableHead key={index} className="text-white/90">
+                                    {column}
+                                  </TableHead>
                                 ))}
                               </TableRow>
-                            ))}
-                          </TableBody>
-                        </Table>
+                            </TableHeader>
+                            <TableBody>
+                              {tableData.rows.map((row, rowIndex) => (
+                                <TableRow key={rowIndex}>
+                                  {row.map((cell, cellIndex) => (
+                                    <TableCell key={cellIndex} className="text-white/80">
+                                      {cell}
+                                    </TableCell>
+                                  ))}
+                                </TableRow>
+                              ))}
+                            </TableBody>
+                          </Table>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>
