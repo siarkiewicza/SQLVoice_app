@@ -1,3 +1,6 @@
+![Generates SQL queries](images/SQL_Voice.png)
+
+
 # Welcome to your Lovable project
 
 ## Project info
